@@ -1,7 +1,9 @@
 import time
+import random
 import string
 from tkinter import *
 def new_window():
+    global new_ids
     gui = Tk()
     gui.geometry('1180x240')
     gui.config(bg='#86C5D8')
@@ -12,31 +14,31 @@ def new_window():
 
 
     alphabets = ['emmad','ghufran']
-    numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-    ids = ['12345678','87654321']
+    #numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    ids = new_ids
 
 
     def roger():
         def name():
+            def Id():
+                if len(ent2.get()) == 5:
+                    if ent2.get() in ids:
+                        approve2 = Label(gui, text='(✔ your id is correct)', bg='#86C5D8')
+                        approve2.grid(row=2, column=3)
+                        current_time = time.strftime('%I:%M:%S')
+                        main_data = data + ent2.get() + '\n' + current_time + '\n'
+                        with open('labours data.txt', 'a') as f:
+                            f.writelines(main_data)
+
+                else:
+                    decline2 = Label(gui, text='(✖ your id lenght is not correct)', bg='#86C5D8')
+                    decline2.grid(row=2, column=3)
+
             if ent1.get() in alphabets:
                 data = ent1.get() + '\n'
-                approve1 = Label(gui, text='(approved ✔)',bg='#86C5D8')
+                approve1 = Label(gui, text='(✔ your name is in our system)',bg='#86C5D8')
                 approve1.grid(row=1, column=3)
-
-
-                def Id():
-                    if len(ent2.get()) == 8:
-                        if ent2.get() in ids:
-                            current_time=time.strftime('%I:%M:%S')
-                            main_data = data + ent2.get() + '\n' + current_time + '\n'
-                            with open('labours data.txt', 'a') as f:
-                                f.writelines(main_data)
-
-                    else:
-                        decline2 = Label(gui, text='(your id lenght is nor correct)',bg='#86C5D8')
-                        decline2.grid(row=3, column=3)
-
-                calling_id= Id()
+                Id()
             else:
                 decline1 = Label(gui, text='(✖ use the right format)',bg='#86C5D8')
                 decline1.grid(row=1, column=3)
@@ -81,11 +83,25 @@ def new_window():
 
 signup=Tk()
 signup.config(bg='#86C5D8')
-
+new_ids=[]
 def id_generation():
-    new_id=Label(signup,text='')
+    randomlist = random.sample(range(0, 9), 5)
+    code = str(randomlist[0]) + str(randomlist[1]) + str(randomlist[2]) + str(randomlist[3]) + str(randomlist[4])
+    new_ids.append(code)
+    print(new_ids)
+    text_input= code
+    new_id=Label(signup,text='(you can login to the system)',bg='#86C5D8',pady=20)
     new_id.grid(row=12,column=0,columnspan=2)
+    new_code=Label(signup,text='your id is'+' '+ text_input,bg='#86C5D8',font=('arial 20 bold'))
+    new_code.grid(row=12, column=2)
+    bio_data=ent1.get()+'\n'+ ent2.get()+'\n'+ ent3.get()+'\n'+ ent4.get()+'\n'+ ent5.get()+'\n'+ ent6.get()+'\n'+ ent7.get()+'\n'
+    with open('labours bio data.txt','a') as f:
+        f.writelines(bio_data)
+
+
+
     new_window()
+
 def clear():
     global clean
     clean=''
@@ -123,41 +139,40 @@ ent2.grid(row=2,column=2)
 lab7=Label(signup,text='Mobile Number',bg='#86C5D8',pady=20,font=('arial 15 bold'))
 lab7.grid(row=6,column=0,columnspan=2)
 
-ent6=Entry(signup,width=40,bd=5,textvariable=textinput3)
-ent6.grid(row=6,column=2)
+ent3=Entry(signup,width=40,bd=5,textvariable=textinput3)
+ent3.grid(row=6,column=2)
 
 lab8=Label(signup,text='Gender',bg='#86C5D8',pady=20,font=('arial 15 bold'))
 lab8.grid(row=7,column=0,columnspan=2)
 
-ent7=Entry(signup,width=40,bd=5,textvariable=textinput4)
-ent7.grid(row=7,column=2)
+ent4=Entry(signup,width=40,bd=5,textvariable=textinput4)
+ent4.grid(row=7,column=2)
 
 lab9=Label(signup,text='Date Of Birth',bg='#86C5D8',pady=20,font=('arial 15 bold'))
 lab9.grid(row=8,column=0,columnspan=2)
 
-ent8=Entry(signup,width=40,bd=5,textvariable=textinput5)
-ent8.grid(row=8,column=2)
+ent5=Entry(signup,width=40,bd=5,textvariable=textinput5)
+ent5.grid(row=8,column=2)
 
 lab10=Label(signup,text='Country',bg='#86C5D8',pady=20,font=('arial 15 bold'))
 lab10.grid(row=9,column=0,columnspan=2)
 
-ent9=Entry(signup,width=40,bd=5,textvariable=textinput6)
-ent9.grid(row=9,column=2)
+ent6=Entry(signup,width=40,bd=5,textvariable=textinput6)
+ent6.grid(row=9,column=2)
 
 lab11=Label(signup,text='City',bg='#86C5D8',pady=20,font=('arial 15 bold'))
 lab11.grid(row=10,column=0,columnspan=2)
 
-ent10=Entry(signup,width=40,bd=5,textvariable=textinput7)
-ent10.grid(row=10,column=2)
+ent7=Entry(signup,width=40,bd=5,textvariable=textinput7)
+ent7.grid(row=10,column=2)
 
-btn2=Button(signup,text='SignUp',command=id_generation,width=10,bd=5,activebackground='#4682B4')
-btn2.grid(row=11,column=1,columnspan=2)
+btn2=Button(signup,text='SignUp',command=id_generation,width=10,padx=20,bd=5,activebackground='#4682B4')
+btn2.grid(row=11,column=1,columnspan=1)
 
-btn3=Button(signup,text='Clear All',width=7,command=clear,bd=5,activebackground='#4682B4')
-btn3.grid(row=11,column=2,columnspan=3)
+btn3=Button(signup,text='Clear All',width=10,padx=20,command=clear,bd=5,activebackground='#4682B4')
+btn3.grid(row=11,column=2,columnspan=1)
 
 copy_rights=Label(signup,text='© 2021 MUHAMMAD EMMAD SIDDIQUI.  All rights reserved',pady=20,bg='#86C5D8')
 copy_rights.grid(row=13,column=2,columnspan=3)
 
 signup.mainloop()
-
