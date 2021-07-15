@@ -1,11 +1,21 @@
 import time
 import random
-import string
+from datetime import datetime
 from tkinter import *
+entry_time =datetime.now()
+exit_time =datetime.now()
+duration =datetime.now()
+
+
+
+
+
+
+#THIRD WINDOW
 def exit_sys():
     global new_ids
     exit = Tk()
-    exit.geometry('1180x240')
+    exit.geometry('1180x320')
     exit.config(bg='#86C5D8')
 
     def TM():
@@ -14,7 +24,6 @@ def exit_sys():
         clock.after(200, TM)
 
     alphabets = ['Muhammad Emmad Siddiqui', 'ghufran']
-    # numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
     ids = new_ids
 
     def roger():
@@ -23,25 +32,31 @@ def exit_sys():
                 if len(ent2.get()) == 5:
                     if ent2.get() in ids:
                         approve2 = Label(exit, text='(✔ your id is correct)', bg='#86C5D8')
-                        approve2.grid(row=2, column=3)
-                        current_time = time.strftime('%I:%M:%S')
-                        main_data = data + ent2.get() + '\n' + current_time + '\n'
+                        approve2.grid(row=3, column=3)
+                        exit_time=datetime.now()
+                        duration =exit_time - entry_time
+                        #duration=StringVar()
+                        duration_label = Label(exit, text= 'duration', bg='#86C5D8')
+                        duration_label.grid(row=7, column=0)
+                        print(exit_time - entry_time)
+                        main_data = data + ent2.get() + '\n' + str(exit_time) + '\n'
+
                         with open('labours data.txt', 'a') as f:
                             f.writelines(main_data)
 
 
                 else:
                     decline2 = Label(exit, text='(✖ your id lenght is not correct)', bg='#86C5D8')
-                    decline2.grid(row=2, column=3)
+                    decline2.grid(row=3, column=3)
 
             if ent1.get() in alphabets:
                 data = ent1.get() + '\n'
                 approve1 = Label(exit, text='(✔ your name is in our system)', bg='#86C5D8')
-                approve1.grid(row=1, column=3)
+                approve1.grid(row=2, column=3)
                 Id()
             else:
                 decline1 = Label(exit, text='(✖ use the right format)', bg='#86C5D8')
-                decline1.grid(row=1, column=3)
+                decline1.grid(row=2, column=3)
 
         name()
 
@@ -53,47 +68,59 @@ def exit_sys():
     input1 = StringVar()
     input2 = StringVar()
 
+
+    def final_exit():
+        exit.destroy()
+
     clock = Label(exit, font=('arial 20 bold'), bg='#86C5D8')
     clock.grid(rowspan=2, column=4)
 
     outsource = Label(exit, text='OUT SOURCING LABOURS MANAGEMENT SYSTEM', font=('arial 20 bold'), pady=20, bg='#86C5D8')
     outsource.grid(row=0, columnspan=2)
 
+    exit_label = Label(exit, text='EXIT SYSTEM', font=('arial 20 bold'), bg='#86C5D8')
+    exit_label.grid(row=1, columnspan=2)
+
+
     name = Label(exit, text='ENTER YOUR FULL NAME', font=('arial 10 bold'), pady=10, bg='#86C5D8')
-    name.grid(row=1, column=0)
+    name.grid(row=2, column=0)
 
     ent1 = Entry(exit, width=45, bd=5, textvariable=input1)
-    ent1.grid(row=1, column=1)
+    ent1.grid(row=2, column=1)
 
     uniqueid = Label(exit, text='ENTER YOUR ID', font=('arial 10 bold'), pady=10, bg='#86C5D8')
-    uniqueid.grid(row=2, column=0)
+    uniqueid.grid(row=3, column=0)
 
     ent2 = Entry(exit, width=45, bd=5, textvariable=input2)
-    ent2.grid(row=2, column=1)
+    ent2.grid(row=3, column=1)
 
     submit = Button(exit, text='SUBMIT', command=roger, relief=GROOVE, bd=5, width=15, activebackground='#4682B4')
-    submit.place(x=350, y=160)
+    submit.place(x=350, y=200)
 
     next = Button(exit, text='NEXT', command=clear, relief=GROOVE, bd=5, width=15, activebackground='#4682B4')
-    next.place(x=500, y=160)
+    next.place(x=500, y=200)
 
     empty = Label(exit, text='', bg='#86C5D8')
-    empty.grid(row=3, column=3)
+    empty.grid(row=4, column=0)
 
     empty = Label(exit, text='', bg='#86C5D8')
-    empty.grid(row=4, column=3)
+    empty.grid(row=5, column=0)
 
-    exit = Button(exit, text='EXIT', command=exit_sys, relief=GROOVE, bd=5, width=15, activebackground='#4682B4')
-    exit.place(x=420, y=200)
+    empty = Label(exit, text='', bg='#86C5D8')
+    empty.grid(row=6, column=3)
+
+
+    exit2 = Button(exit, text='EXIT', command=final_exit, relief=GROOVE, bd=5, width=15, activebackground='#4682B4')
+    exit2.place(x=420, y=240)
 
     format1 = Label(exit, text='use lower case alphabets only', font=('arial 10 '), bg='#86C5D8')
-    format1.grid(row=1, column=2)
+    format1.grid(row=2, column=2)
 
     format2 = Label(exit, text='enter only in numbers', font=('arial 10'), bg='#86C5D8')
-    format2.grid(row=2, column=2)
+    format2.grid(row=3, column=2)
 
     copy_rights = Label(exit, text='© 2021 MUHAMMAD EMMAD SIDDIQUI.  All rights reserved', pady=20, bg='#86C5D8')
-    copy_rights.grid(row=5, column=2, columnspan=3)
+    copy_rights.grid(row=8, column=2, columnspan=3)
 
     TM()
     exit.mainloop()
@@ -107,13 +134,13 @@ def exit_sys():
 
 
 
-
+#SECOND WINDOW
 
 def new_window():
     global new_ids
-    gui = Tk()
-    gui.geometry('1180x240')
-    gui.config(bg='#86C5D8')
+    gui_login = Tk()
+    gui_login.geometry('1180x320')
+    gui_login.config(bg='#86C5D8')
     def TM():
         Time = time.strftime('%I:%M:%S')
         clock.config(text=Time)
@@ -121,7 +148,6 @@ def new_window():
 
 
     alphabets = ['Muhammad Emmad Siddiqui','ghufran']
-    #numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
     ids = new_ids
 
 
@@ -130,26 +156,26 @@ def new_window():
             def Id():
                 if len(ent2.get()) == 5:
                     if ent2.get() in ids:
-                        approve2 = Label(gui, text='(✔ your id is correct)', bg='#86C5D8')
-                        approve2.grid(row=2, column=3)
-                        current_time = time.strftime('%I:%M:%S')
-                        main_data = data + ent2.get() + '\n' + current_time + '\n'
+                        approve2 = Label(gui_login, text='(✔ your id is correct)', bg='#86C5D8')
+                        approve2.grid(row=3, column=3)
+                        entry_time = datetime.now()
+                        main_data = data + ent2.get() + '\n' + str(entry_time) + '\n'
                         with open('labours data.txt', 'a') as f:
                             f.writelines(main_data)
 
 
                 else:
-                    decline2 = Label(gui, text='(✖ your id lenght is not correct)', bg='#86C5D8')
-                    decline2.grid(row=2, column=3)
+                    decline2 = Label(gui_login, text='(✖ your id lenght is not correct)', bg='#86C5D8')
+                    decline2.grid(row=3, column=3)
 
             if ent1.get() in alphabets:
                 data = ent1.get() + '\n'
-                approve1 = Label(gui, text='(✔ your name is in our system)',bg='#86C5D8')
-                approve1.grid(row=1, column=3)
+                approve1 = Label(gui_login, text='(✔ your name is in our system)',bg='#86C5D8')
+                approve1.grid(row=2, column=3)
                 Id()
             else:
-                decline1 = Label(gui, text='(✖ use the right format)',bg='#86C5D8')
-                decline1.grid(row=1, column=3)
+                decline1 = Label(gui_login, text='(✖ use the right format)',bg='#86C5D8')
+                decline1.grid(row=2, column=3)
 
 
 
@@ -165,50 +191,66 @@ def new_window():
     input1=StringVar()
     input2=StringVar()
 
-    clock = Label(gui,font=('arial 20 bold'),bg='#86C5D8')
+    clock = Label(gui_login,font=('arial 20 bold'),bg='#86C5D8')
     clock.grid(rowspan=2, column=4)
 
-    outsource = Label(gui, text='OUT SOURCING LABOURS MANAGEMENT SYSTEM',font=('arial 20 bold'),pady=20,bg='#86C5D8')
+    outsource = Label(gui_login, text='OUT SOURCING LABOURS MANAGEMENT SYSTEM',font=('arial 20 bold'),pady=20,bg='#86C5D8')
     outsource.grid(row=0, columnspan=2)
 
-    name = Label(gui, text='ENTER YOUR FULL NAME',font=('arial 10 bold'),pady=10,bg='#86C5D8')
-    name.grid(row=1, column=0)
+    login_label =Label(gui_login, text='LOGIN SYSTEM',font=('arial 20 bold'),bg='#86C5D8')
+    login_label.grid(row=1, columnspan=2)
 
-    ent1 = Entry(gui,width=45,bd=5,textvariable=input1)
-    ent1.grid(row=1, column=1)
+    name = Label(gui_login, text='ENTER YOUR FULL NAME',font=('arial 10 bold'),pady=10,bg='#86C5D8')
+    name.grid(row=2, column=0)
 
-    uniqueid = Label(gui, text='ENTER YOUR ID',font=('arial 10 bold'),pady=10,bg='#86C5D8')
-    uniqueid.grid(row=2, column=0)
+    ent1 = Entry(gui_login,width=45,bd=5,textvariable=input1)
+    ent1.grid(row=2, column=1)
 
-    ent2 = Entry(gui,width=45,bd=5,textvariable=input2)
-    ent2.grid(row=2, column=1)
+    uniqueid = Label(gui_login, text='ENTER YOUR ID',font=('arial 10 bold'),pady=10,bg='#86C5D8')
+    uniqueid.grid(row=3, column=0)
 
-    submit = Button(gui, text='SUBMIT', command=roger,relief=GROOVE,bd=5,width=15,activebackground='#4682B4')
-    submit.place(x=350, y=160)
+    ent2 = Entry(gui_login,width=45,bd=5,textvariable=input2)
+    ent2.grid(row=3, column=1)
 
-    next=Button(gui, text='NEXT', command=clear,relief=GROOVE,bd=5,width=15,activebackground='#4682B4')
-    next.place(x=500,y=160)
+    submit = Button(gui_login, text='SUBMIT', command=roger,relief=GROOVE,bd=5,width=15,activebackground='#4682B4')
+    submit.place(x=350, y=200)
 
-    empty=Label(gui, text='',bg='#86C5D8')
-    empty.grid(row=3,column=3)
+    next=Button(gui_login, text='NEXT', command=clear,relief=GROOVE,bd=5,width=15,activebackground='#4682B4')
+    next.place(x=500,y=200)
 
-    empty = Label(gui, text='', bg='#86C5D8')
-    empty.grid(row=4, column=3)
+    empty=Label(gui_login, text='',bg='#86C5D8')
+    empty.grid(row=4,column=3)
 
-    exit=Button(gui, text='EXIT', command=exit_sys,relief=GROOVE,bd=5,width=15,activebackground='#4682B4')
-    exit.place(x=420,y=200)
+    empty = Label(gui_login, text='', bg='#86C5D8')
+    empty.grid(row=5, column=3)
 
-    format1 = Label(gui,text='use lower case alphabets only',font=('arial 10 '),bg='#86C5D8')
-    format1.grid(row=1, column=2)
+    exit1=Button(gui_login, text='EXIT SYSTEM', command=exit_sys,relief=GROOVE,bd=5,width=15,activebackground='#4682B4')
+    exit1.place(x=420,y=240)
 
-    format2 = Label(gui,text='enter only in numbers',font=('arial 10'),bg='#86C5D8')
-    format2.grid(row=2, column=2)
+    format1 = Label(gui_login,text='use lower case alphabets only',font=('arial 10 '),bg='#86C5D8')
+    format1.grid(row=2, column=2)
 
-    copy_rights=Label(gui,text='© 2021 MUHAMMAD EMMAD SIDDIQUI.  All rights reserved',pady=20,bg='#86C5D8')
-    copy_rights.grid(row=5,column=2,columnspan=3)
+    format2 = Label(gui_login,text='enter only in numbers',font=('arial 10'),bg='#86C5D8')
+    format2.grid(row=3, column=2)
+
+    copy_rights=Label(gui_login,text='© 2021 MUHAMMAD EMMAD SIDDIQUI.  All rights reserved',pady=20,bg='#86C5D8')
+    copy_rights.grid(row=6,column=2,columnspan=3)
 
     TM()
-    gui.mainloop()
+    gui_login.mainloop()
+
+
+
+
+
+
+
+
+
+
+
+#FIRST WINDOW
+
 signup=Tk()
 signup.config(bg='#86C5D8')
 new_ids=[]
@@ -225,10 +267,12 @@ def id_generation():
     bio_data=ent1.get()+'\n'+ ent2.get()+'\n'+ ent3.get()+'\n'+ ent4.get()+'\n'+ ent5.get()+'\n'+ ent6.get()+'\n'+ ent7.get()+'\n'
     with open('labours bio data.txt','a') as f:
         f.writelines(bio_data)
+#    def destroy1():
+#        signup.destroy()
 
-
-
+#    destroy1()
     new_window()
+
 
 def clear():
     global clean
@@ -305,4 +349,10 @@ copy_rights=Label(signup,text='© 2021 MUHAMMAD EMMAD SIDDIQUI.  All rights rese
 copy_rights.grid(row=13,column=2,columnspan=3)
 
 signup.mainloop()
+
+
+
+
+
+
 
