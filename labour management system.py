@@ -2,9 +2,9 @@ import time
 import random
 from datetime import datetime
 from tkinter import *
-entry_time =datetime.now()
-exit_time =datetime.now()
-duration =datetime.now()
+entry_time = datetime.now()
+exit_time = datetime.now()
+duration = datetime.now()
 
 
 
@@ -12,10 +12,11 @@ duration =datetime.now()
 
 
 #THIRD WINDOW
+
 def exit_sys():
     global new_ids
     exit = Tk()
-    exit.geometry('1180x320')
+    exit.geometry('1180x360')
     exit.config(bg='#86C5D8')
 
     def TM():
@@ -23,7 +24,6 @@ def exit_sys():
         clock.config(text=Time)
         clock.after(200, TM)
 
-    alphabets = ['Muhammad Emmad Siddiqui', 'ghufran']
     ids = new_ids
 
     def roger():
@@ -35,13 +35,15 @@ def exit_sys():
                         approve2.grid(row=3, column=3)
                         exit_time=datetime.now()
                         duration =exit_time - entry_time
-                        #duration=StringVar()
-                        duration_label = Label(exit, text= 'duration', bg='#86C5D8')
-                        duration_label.grid(row=7, column=0)
+
+
                         print(exit_time - entry_time)
                         main_data = data + ent2.get() + '\n' + str(exit_time) + '\n'
-
-                        with open('labours data.txt', 'a') as f:
+                        duration_label = Label(exit, text='DURATION IN THE SYSTEM:',font=('arial 12 bold') ,bg='#86C5D8')
+                        duration_label.grid(row=7, column=0)
+                        duration_label = Label(exit, text=duration,font=('arial 12 bold') ,bg='#86C5D8')
+                        duration_label.grid(row=8, column=0)
+                        with open('(Labours Exit Data).txt', 'a') as f:
                             f.writelines(main_data)
 
 
@@ -120,7 +122,7 @@ def exit_sys():
     format2.grid(row=3, column=2)
 
     copy_rights = Label(exit, text='© 2021 MUHAMMAD EMMAD SIDDIQUI.  All rights reserved', pady=20, bg='#86C5D8')
-    copy_rights.grid(row=8, column=2, columnspan=3)
+    copy_rights.grid(row=9, column=2, columnspan=3)
 
     TM()
     exit.mainloop()
@@ -146,10 +148,7 @@ def new_window():
         clock.config(text=Time)
         clock.after(200, TM)
 
-
-    alphabets = ['Muhammad Emmad Siddiqui','ghufran']
     ids = new_ids
-
 
     def roger():
         def name():
@@ -160,7 +159,7 @@ def new_window():
                         approve2.grid(row=3, column=3)
                         entry_time = datetime.now()
                         main_data = data + ent2.get() + '\n' + str(entry_time) + '\n'
-                        with open('labours data.txt', 'a') as f:
+                        with open('(Labours Entry Data).txt', 'a') as f:
                             f.writelines(main_data)
 
 
@@ -182,14 +181,15 @@ def new_window():
         name()
 
 
-    def clear():
-        clean=''
-        input1.set(clean)
-        input2.set(clean)
+    def clear2():
+        global clean2
+        clean2=''
+        input1.set(clean2)
+        input2.set(clean2)
 
-
-    input1=StringVar()
-    input2=StringVar()
+    clean2=''
+    input1 = StringVar()
+    input2 = StringVar()
 
     clock = Label(gui_login,font=('arial 20 bold'),bg='#86C5D8')
     clock.grid(rowspan=2, column=4)
@@ -215,8 +215,8 @@ def new_window():
     submit = Button(gui_login, text='SUBMIT', command=roger,relief=GROOVE,bd=5,width=15,activebackground='#4682B4')
     submit.place(x=350, y=200)
 
-    next=Button(gui_login, text='NEXT', command=clear,relief=GROOVE,bd=5,width=15,activebackground='#4682B4')
-    next.place(x=500,y=200)
+    next1 = Button(gui_login, text='NEXT', command=clear2,relief=GROOVE,bd=5,width=15,activebackground='#4682B4')
+    next1.place(x=500,y=200)
 
     empty=Label(gui_login, text='',bg='#86C5D8')
     empty.grid(row=4,column=3)
@@ -254,18 +254,20 @@ def new_window():
 signup=Tk()
 signup.config(bg='#86C5D8')
 new_ids=[]
+alphabets=[]
 def id_generation():
     randomlist = random.sample(range(0, 9), 5)
     code = str(randomlist[0]) + str(randomlist[1]) + str(randomlist[2]) + str(randomlist[3]) + str(randomlist[4])
     new_ids.append(code)
     print(new_ids)
+    alphabets.append(ent1.get())
     text_input= code
     new_id=Label(signup,text='(you can login to the system)',bg='#86C5D8',pady=20)
     new_id.grid(row=12,column=0,columnspan=2)
     new_code=Label(signup,text='your id is'+' '+ text_input,bg='#86C5D8',font=('arial 20 bold'))
     new_code.grid(row=12, column=2)
-    bio_data=ent1.get()+'\n'+ ent2.get()+'\n'+ ent3.get()+'\n'+ ent4.get()+'\n'+ ent5.get()+'\n'+ ent6.get()+'\n'+ ent7.get()+'\n'
-    with open('labours bio data.txt','a') as f:
+    bio_data=ent1.get()+'\n'+ ent2.get()+'\n'+ ent3.get()+'\n'+ ent4.get()+'\n'+ ent5.get()+'\n'+ ent6.get()+'\n'+ ent7.get()+'\n'+'XX-------------------XX---------------------XX'
+    with open('(labours bio data).txt','a') as f:
         f.writelines(bio_data)
 #    def destroy1():
 #        signup.destroy()
@@ -274,7 +276,7 @@ def id_generation():
     new_window()
 
 
-def clear():
+def clear1():
     global clean
     clean=''
     textinput1.set(clean)
@@ -341,7 +343,7 @@ ent7.grid(row=10,column=2)
 btn2=Button(signup,text='SignUp',command=id_generation,relief=GROOVE,bd=5,width=15,activebackground='#4682B4')
 btn2.place(x=340,y=540)
 
-btn3=Button(signup,text='Clear All',command=clear,relief=GROOVE,bd=5,width=15,activebackground='#4682B4')
+btn3=Button(signup,text='Clear All',command=clear1,relief=GROOVE,bd=5,width=15,activebackground='#4682B4')
 btn3.place(x=495,y=540)
 empty=Label(signup,text='',bg='#86C5D8')
 empty.grid(row=11,column=2)
