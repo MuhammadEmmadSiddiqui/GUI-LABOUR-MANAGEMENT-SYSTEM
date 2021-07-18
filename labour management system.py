@@ -16,7 +16,7 @@ duration = datetime.now()
 def exit_sys():
     global new_ids
     exit = Tk()
-    exit.geometry('1180x360')
+    exit.geometry('1180x440')
     exit.config(bg='#86C5D8')
 
     def TM():
@@ -34,16 +34,22 @@ def exit_sys():
                         approve2 = Label(exit, text='(✔ your id is correct)', bg='#86C5D8')
                         approve2.grid(row=3, column=3)
                         exit_time = datetime.now()
-                        duration = exit_time - entry_time
-
-                        print(exit_time - entry_time)
+                        duration_in_secs = (exit_time - entry_time).total_seconds()
+                        duration = round(duration_in_secs/3600, 3)
+                        daily_wage_per_hour= 62.5
+                        calculated_wage=daily_wage_per_hour*duration
+                        print(calculated_wage)
+                        print(duration)
                         main_data = data + exit_ent2.get() + '\n' + str(exit_time) + '\n'
                         #decline_2.destroy()
-                        duration_label = Label(exit, text='DURATION IN THE SYSTEM:', font=('arial 12 bold'),
-                                               bg='#86C5D8')
+                        duration_label = Label(exit, text='DURATION IN THE SYSTEM:', font=('arial 11 bold'),bg='#86C5D8')
                         duration_label.grid(row=7, column=0)
-                        duration_label = Label(exit, text=duration, font=('arial 12 bold'), bg='#86C5D8')
+                        duration_label = Label(exit, text= str(duration) + ' ' + 'Hours', font=('arial 11 bold'), bg='#86C5D8')
                         duration_label.grid(row=8, column=0)
+                        wage_label=Label(exit, text='YOUR WAGE CALCULATED IS:', font=('arial 11 bold'),bg='#86C5D8')
+                        wage_label.grid(row=9, column=0)
+                        final_wage=Label(exit, text= str(calculated_wage) + ' ' + 'Rs' , font=('arial 11 bold'), bg='#86C5D8')
+                        final_wage.grid(row=10,column=0)
                         with open('(Labours Exit Data).txt', 'a') as f:
                             f.writelines(main_data)
 
