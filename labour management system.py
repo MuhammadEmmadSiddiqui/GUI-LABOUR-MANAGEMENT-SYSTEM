@@ -2,6 +2,8 @@ import time
 import random
 from datetime import datetime
 from tkinter import *
+from tkinter import ttk
+from tkcalendar import DateEntry
 entry_time = datetime.now()
 exit_time = datetime.now()
 duration = datetime.now()
@@ -283,38 +285,39 @@ def new_window():
 
 
 
-
-
 #FIRST WINDOW
 
 signup=Tk()
 signup.config(bg='#86C5D8')
+signup.attributes('-fullscreen')
 new_ids=[]
 alphabets=[]
 labours_data={}
 def id_generation():
-    randomlist = random.sample(range(0, 9), 5)
-    code = str(randomlist[0]) + str(randomlist[1]) + str(randomlist[2]) + str(randomlist[3]) + str(randomlist[4])
-    new_ids.append(code)
-    print(new_ids)
-    alphabets.append(ent1.get())
-    print(ent1.get())
-    labours_data[ent1.get()]=int(code)
-    print(labours_data)
-    text_input= code
-    new_id=Label(signup,text='(you can login to the system)',bg='#86C5D8',pady=20)
-    new_id.grid(row=12,column=0,columnspan=2)
-    new_code=Label(signup,text='your id is'+' '+ text_input,bg='#86C5D8',font=('Times 20 bold'))
-    new_code.grid(row=12, column=2)
-    bio_data=ent1.get()+'\n'+ ent2.get()+'\n'+ ent3.get()+'\n'+ ent4.get()+'\n'+ ent5.get()+'\n'+ ent6.get()+'\n'+ ent7.get()+'\n'+'XX-------------------XX---------------------XX'
-    with open('(labours bio data).txt','a') as f:
-        f.writelines(bio_data)
-#    def destroy1():
-#        signup.destroy()
+    if ent1.get() !="Enter Your First Name" or ent2.get() !="Enter Your Last Name" or ent3.get() !="03**-*******" or ent4.get() !='' or ent5.get() !='6/22/19' or ent6.get() !='' or ent7.get() !='':
+        randomlist = random.sample(range(0, 9), 5)
+        code = str(randomlist[0]) + str(randomlist[1]) + str(randomlist[2]) + str(randomlist[3]) + str(randomlist[4])
+        new_ids.append(code)
+        print(new_ids)
+        alphabets.append(ent1.get())
+        print(ent1.get())
+        labours_data[ent1.get()]=int(code)
+        print(labours_data)
+        text_input= code
+        new_id=Label(signup,text='(you can login to the system)',bg='#86C5D8',pady=20)
+        new_id.grid(row=12,column=0,columnspan=2)
+        new_code=Label(signup,text='your id is'+' '+ text_input,bg='#86C5D8',font=('Times 20 bold'))
+        new_code.grid(row=12, column=2)
+        bio_data=ent1.get()+'\n'+ ent2.get()+'\n'+ ent3.get()+'\n'+ ent4.get()+'\n'+ ent5.get()+'\n'+ ent6.get()+'\n'+ ent7.get()+'\n'+'XX-------------------XX---------------------XX'
+        with open('(labours bio data).txt','a') as f:
+            f.writelines(bio_data)
+#       def destroy1():
+#           signup.destroy()
 
-#    destroy1()
-    new_window()
-
+#       destroy1()
+        new_window()
+    else:
+        print("can't be empty")
 
 def clear1():
     global clean
@@ -322,19 +325,41 @@ def clear1():
     textinput1.set(clean)
     textinput2.set(clean)
     textinput3.set(clean)
-    textinput4.set(clean)
+    number4.set(clean)
     textinput5.set(clean)
-    textinput6.set(clean)
-    textinput7.set(clean)
-
+    number6.set(clean)
+    number7.set(clean)
 clean=''
 textinput1=StringVar()
 textinput2=StringVar()
 textinput3=StringVar()
-textinput4=StringVar()
 textinput5=StringVar()
-textinput6=StringVar()
-textinput7=StringVar()
+
+
+def clear_search1(event):
+    ent1.delete(0,END)
+
+def clear_search2(event):
+    ent2.delete(0,END)
+
+def clear_search3(event):
+    ent3.delete(0,END)
+
+#def clear_search4(event):
+    #ent4.delete(0,END)
+
+#def clear_search5(event):
+    #ent5.delete(0,END)
+
+#def clear_search6(event):
+    #ent6.delete(0,END)
+
+#def clear_search7(event):
+    #ent7.delete(0, END)
+
+
+
+
 lab1=Label(signup,text='OUT SOURCING LABOURS MANAGEMENT SYSTEM',font=('Times 20 bold'),pady=20,bg='#86C5D8')
 lab1.grid(row=0,columnspan=3)
 
@@ -343,42 +368,88 @@ lab2.grid(row=1,column=0,columnspan=2)
 
 ent1=Entry(signup,width=45,bd=5,textvariable=textinput1)
 ent1.grid(row=1,column=2)
+ent1.insert(0,"Enter Your First Name")
+ent1.bind("<Button-1>", clear_search1)
 
 lab3=Label(signup,text='Last Name',bg='#86C5D8',pady=20,font=('Times 15 bold'))
 lab3.grid(row=2,column=0,columnspan=2)
 
 ent2=Entry(signup,width=45,bd=5,textvariable=textinput2)
 ent2.grid(row=2,column=2)
+ent2.insert(0,"Enter Your Last Name")
+ent2.bind("<Button-1>", clear_search2)
 
 lab7=Label(signup,text='Mobile Number',bg='#86C5D8',pady=20,font=('Times 15 bold'))
 lab7.grid(row=6,column=0,columnspan=2)
 
 ent3=Entry(signup,width=45,bd=5,textvariable=textinput3)
 ent3.grid(row=6,column=2)
+ent3.insert(0,"03**-*******")
+ent3.bind("<Button-1>", clear_search3)
 
 lab8=Label(signup,text='Gender',bg='#86C5D8',pady=20,font=('Times 15 bold'))
 lab8.grid(row=7,column=0,columnspan=2)
 
-ent4=Entry(signup,width=45,bd=5,textvariable=textinput4)
+#ent4=Entry(signup,width=45,bd=5,textvariable=textinput4)
+#ent4.grid(row=7,column=2)
+#ent4.insert(0, "MALE/FEMALE")
+#ent4.bind("<Button-1>", clear_search4)
+
+
+number4 = StringVar()
+ent4 = ttk.Combobox(signup, width=45,textvariable=number4)
+ent4['values'] = ('','Male','Female','Others')
 ent4.grid(row=7,column=2)
+ent4.current(0)
+
+
 
 lab9=Label(signup,text='Date Of Birth',bg='#86C5D8',pady=20,font=('Times 15 bold'))
 lab9.grid(row=8,column=0,columnspan=2)
 
-ent5=Entry(signup,width=45,bd=5,textvariable=textinput5)
+#ent5=Entry(signup,width=45,bd=5,textvariable=textinput5)
+#ent5.grid(row=8,column=2)
+#ent5.insert(0, "DATE/MONTH/YEAR")
+#ent5.bind("<Button-1>", clear_search5)
+
+
+ent5 = DateEntry(signup, width=45, year= , month=6, day=22,
+background='lightblue', foreground='black', borderwidth=2)
 ent5.grid(row=8,column=2)
 
 lab10=Label(signup,text='Country',bg='#86C5D8',pady=20,font=('Times 15 bold'))
 lab10.grid(row=9,column=0,columnspan=2)
 
-ent6=Entry(signup,width=45,bd=5,textvariable=textinput6)
+#ent6=Entry(signup,width=45,bd=5,textvariable=textinput6)
+#ent6.grid(row=9,column=2)
+#ent6.insert(0, "Enter Your Country Name")
+#ent6.bind("<Button-1>", clear_search6)
+
+
+number6 = StringVar()
+ent6 = ttk.Combobox(signup, width=45,textvariable=number6)
+ent6['values'] = ('','Pakistan','India','Bangladesh')
 ent6.grid(row=9,column=2)
+ent6.current(0)
+
+
 
 lab11=Label(signup,text='City',bg='#86C5D8',pady=20,font=('Times 15 bold'))
 lab11.grid(row=10,column=0,columnspan=2)
 
-ent7=Entry(signup,width=45,bd=5,textvariable=textinput7)
+#ent7=Entry(signup,width=45,bd=5,textvariable=textinput7)
+#ent7.grid(row=10,column=2)
+#ent7.insert(0, "Enter Your City Name")
+#ent7.bind("<Button-1>", clear_search7)
+
+
+number7 = StringVar()
+ent7 = ttk.Combobox(signup, width=45,textvariable=number7)
+ent7['values'] = ('','Karachi','Hyderabad','Lahore','Islamabad')
 ent7.grid(row=10,column=2)
+ent7.current(0)
+
+
 
 btn2=Button(signup,text='SignUp',command=id_generation,relief=GROOVE,bd=5,width=15,activebackground='#4682B4')
 btn2.place(x=340,y=540)
