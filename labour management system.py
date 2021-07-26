@@ -217,17 +217,17 @@ def new_window():
         name()
 
 
-    #def clear2():
-    #    global clean2
-    #    clean2=''
-    #    input1.set(clean2)
-    #    print(input1)
-    #    input2.set(clean2)
-    #    print(input2)
+    def clear2():
+        global clean2
+        clean2=''
+        login_input1.set('')
+        print(login_input1)
+        login_input2.set('')
+        print(login_input2)
 
-    #clean2=''
-    #input1 = StringVar()
-    #input2 = StringVar()
+    clean2=''
+    login_input1 = StringVar()
+    login_input2 = StringVar()
 
     clock = Label(gui_login,font=('Times 20 bold'),bg='#86C5D8')
     clock.grid(rowspan=2, column=4)
@@ -241,19 +241,19 @@ def new_window():
     name = Label(gui_login, text='ENTER YOUR FIRST NAME',font=('Times 10 bold'),pady=10,bg='#86C5D8')
     name.grid(row=2, column=0)
 
-    login_ent1 = Entry(gui_login,width=45,bd=5)
+    login_ent1 = Entry(gui_login,width=45,bd=5,textvariable=login_input1)
     login_ent1.grid(row=2, column=1)
 
     uniqueid = Label(gui_login, text='ENTER YOUR ID',font=('Times 10 bold'),pady=10,bg='#86C5D8')
     uniqueid.grid(row=3, column=0)
 
-    login_ent2 = Entry(gui_login,width=45,bd=5)
+    login_ent2 = Entry(gui_login,width=45,bd=5,textvariable=login_input2)
     login_ent2.grid(row=3, column=1)
 
     submit = Button(gui_login, text='SUBMIT', command=roger,relief=GROOVE,bd=5,width=15,activebackground='#4682B4')
     submit.place(x=350, y=200)
 
-    next1 = Button(gui_login, text='NEXT',relief=GROOVE,bd=5,width=15,activebackground='#4682B4')
+    next1 = Button(gui_login, text='NEXT',relief=GROOVE,bd=5,width=15,activebackground='#4682B4',command=clear2)
     next1.place(x=500,y=200)
 
     empty=Label(gui_login, text='',bg='#86C5D8')
@@ -308,7 +308,7 @@ def id_generation():
         new_id.grid(row=12,column=0,columnspan=2)
         new_code=Label(signup,text='your id is'+' '+ text_input,bg='#86C5D8',font=('Times 20 bold'))
         new_code.grid(row=12, column=2)
-        bio_data=ent1.get()+'\n'+ ent2.get()+'\n'+ ent3.get()+'\n'+ ent4.get()+'\n'+ ent5.get()+'\n'+ ent6.get()+'\n'+ ent7.get()+'\n'+'XX-------------------XX---------------------XX'
+        bio_data='\n'+ ent1.get()+'\n'+ ent2.get()+'\n'+ ent3.get()+'\n'+ ent4.get()+'\n'+ ent5.get()+'\n'+ ent6.get()+'\n'+ ent7.get()+'\n'+'XX-------------------XX---------------------XX'
         with open('(labours bio data).txt','a') as f:
             f.writelines(bio_data)
 #       def destroy1():
@@ -322,9 +322,9 @@ def id_generation():
 def clear1():
     global clean
     clean=''
-    textinput1.set(clean)
-    textinput2.set(clean)
-    textinput3.set(clean)
+    textinput1.set("Enter Your First Name")
+    textinput2.set("Enter Your Last Name")
+    textinput3.set("03**-*******")
     number4.set(clean)
     textinput5.set(clean)
     number6.set(clean)
@@ -413,7 +413,7 @@ lab9.grid(row=8,column=0,columnspan=2)
 #ent5.bind("<Button-1>", clear_search5)
 
 
-ent5 = DateEntry(signup, width=45, year= , month=6, day=22,
+ent5 = DateEntry(signup, width=45, year=2019 , month=6, day=22,
 background='lightblue', foreground='black', borderwidth=2)
 ent5.grid(row=8,column=2)
 
